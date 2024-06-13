@@ -1,7 +1,9 @@
 import React from 'react'
+import PageLayout from '../../../components/PageLayout'
 
 const Signup = () => {
   return (
+   <PageLayout>
     <div className="auth-page">
         <div className="container page">
             <div className="row">
@@ -31,6 +33,7 @@ const Signup = () => {
             </div>
         </div>
     </div>
+</PageLayout> 
   )
 }
 

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import PageLayout from '../../../components/PageLayout'
+import { authContext } from '../../../ services/contexts/authContent'
 
 const Login = () => {
+    const {loginHundleSubmit} = useContext(authContext)
   return (
+<PageLayout>
     <div className="auth-page">
         <div className="container page">
             <div className="row">
@@ -15,19 +19,20 @@ const Login = () => {
                 <li>That email is already taken</li>
                 </ul>
 
-                <form>
-                <fieldset className="form-group">
-                    <input className="form-control form-control-lg" type="text" placeholder="Email" />
-                </fieldset>
-                <fieldset className="form-group">
-                    <input className="form-control form-control-lg" type="password" placeholder="Password" />
-                </fieldset>
-                <button className="btn btn-lg btn-primary pull-xs-right">Sign in</button>
+                <form onSubmit={loginHundleSubmit}>
+                    <fieldset className="form-group">
+                        <input className="form-control form-control-lg" type="text" placeholder="Email" name="emil"/>
+                    </fieldset>
+                    <fieldset className="form-group">
+                        <input className="form-control form-control-lg" type="password" placeholder="Password" name='password' />
+                    </fieldset>
+                    <button type='submit' className="btn btn-lg btn-primary pull-xs-right">Sign in</button>
                 </form>
             </div>
             </div>
         </div>
     </div>
+</PageLayout>
   )
 }
 
