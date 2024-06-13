@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PageLayout from '../../../components/PageLayout'
+import { authContext } from '../../../ services/contexts/authContent'
 
 const Signup = () => {
+    const {
+        signUpHandleChange,
+          signUpHundleSubmit,
+          signUpError
+    } = useContext(authContext)
+
   return (
    <PageLayout>
     <div className="auth-page">
@@ -19,16 +26,16 @@ const Signup = () => {
 
                 <form>
                 <fieldset className="form-group">
-                    <input className="form-control form-control-lg" type="text" placeholder="Username" />
+                    <input className="form-control form-control-lg" type="text" placeholder="Username" name='username' onChange={signUpHandleChange}/>
                 </fieldset>
                 <fieldset className="form-group">
-                    <input className="form-control form-control-lg" type="text" placeholder="Email" />
+                    <input className="form-control form-control-lg" type="text" placeholder="Email" name='email' onChange={signUpHandleChange} />
                 </fieldset>
                 <fieldset className="form-group">
-                    <input className="form-control form-control-lg" type="password" placeholder="Password" />
+                    <input className="form-control form-control-lg" type="password" placeholder="Password"  name='password' onChange={signUpHandleChange} />
                 </fieldset>
-                <button className="btn btn-lg btn-primary pull-xs-right">Sign up</button>
                 </form>
+                 <button className="btn btn-lg btn-primary pull-xs-right" onClick={()=>signUpHundleSubmit()}>Sign up</button>
             </div>
             </div>
         </div>

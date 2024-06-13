@@ -1,6 +1,17 @@
 import React from 'react'
+import getArticleSlug from '../../ services/articleFuction'
+import { useQuery } from '@tanstack/react-query'
+import { useParams } from 'react-router-dom'
 
 const ArticlePage = () => {
+    const { slug } = useParams()
+    
+    const {data} = useQuery({
+    queryKey: ["tags"],
+    queryFn: getArticleSlug(slug as string)
+  })
+  
+
   return (
     <div className="article-page">
         <div className="banner">

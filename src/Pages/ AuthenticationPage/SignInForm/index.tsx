@@ -3,7 +3,7 @@ import PageLayout from '../../../components/PageLayout'
 import { authContext } from '../../../ services/contexts/authContent'
 
 const Login = () => {
-    const {loginHundleSubmit} = useContext(authContext)
+    const {loginHundleSubmit, loginHandleChange, loginError} = useContext(authContext)
   return (
 <PageLayout>
     <div className="auth-page">
@@ -16,18 +16,19 @@ const Login = () => {
                 </p>
 
                 <ul className="error-messages">
-                <li>That email is already taken</li>
+                {loginError && <li> email or password is invalid</li>}
                 </ul>
 
-                <form onSubmit={loginHundleSubmit}>
+                <form>
                     <fieldset className="form-group">
-                        <input className="form-control form-control-lg" type="text" placeholder="Email" name="emil"/>
+                        <input className="form-control form-control-lg" type="text" placeholder="Email" name="email" onChange={loginHandleChange}/>
                     </fieldset>
                     <fieldset className="form-group">
-                        <input className="form-control form-control-lg" type="password" placeholder="Password" name='password' />
+                        <input className="form-control form-control-lg" type="password" placeholder="Password" name='password' onChange={loginHandleChange}/>
                     </fieldset>
-                    <button type='submit' className="btn btn-lg btn-primary pull-xs-right">Sign in</button>
+                    
                 </form>
+                <button className="btn btn-lg btn-primary pull-xs-right" onClick={()=>loginHundleSubmit()}>Sign in</button>
             </div>
             </div>
         </div>

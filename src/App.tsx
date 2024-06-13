@@ -17,9 +17,6 @@ import Signup from './Pages/ AuthenticationPage/SignUpForm';
 import Login from './Pages/ AuthenticationPage/SignInForm';
 
 function App() {
-
-
-  
   const router = createBrowserRouter([
     {
       path: "/",
@@ -32,6 +29,14 @@ function App() {
     {
       path: "/register",
       element: <Signup/>,
+    },
+    {
+      path: "/article/:slug",
+      element: <ArticlePage/>,
+    },
+    {
+      path: "/profile",
+      element: <Profile/>,
     },
   ]);
   
