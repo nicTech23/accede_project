@@ -11,6 +11,13 @@ const HomePage = () => {
         end: 9
     })
 
+    const [tag, setTag] = useState<string>("")
+
+    const getTagName = (tag: string) => {
+        setTag(tag) 
+    }
+    
+
     const changePage = (index: number) => {
         if (pagination.start === 0) {
             
@@ -32,13 +39,15 @@ const HomePage = () => {
                 <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
                     <li className="nav-item">
-                    <a className="nav-link active" href="/">Global Feed</a>
+                    <a className="nav-link " href="/">Global Feed</a>
                     </li>
-
+                    <li className="nav-item">
+                     {tag && <a className="nav-link active" href="/tag">{tag }</a>}
+                    </li>
                 </ul>
                 </div>
                 {
-                    feedData?.articles?.map((data: any, index:number)=>{
+                  Array.isArray(tagFeedData?.articles)  &&  tagFeedData?.articles?.map((data: any, index:number)=>{
                         if ((index >= pagination.start )&& (index <= pagination.end)) {
                             return (
                                 <div className="article-preview">
@@ -73,7 +82,7 @@ const HomePage = () => {
                 }
     
                 <ul className="pagination">
-                    {feedData && Array(feedData?.articles?.length / 10).fill(0).map((_, index)=>{
+                    {tagFeedData && Array(tagFeedData?.articles?.length / 10).fill(0).map((_, index)=>{
                         return (
                             <li key={index} className="page-item ">
                                 <a className="page-link" href="">{index +1}</a>
@@ -89,7 +98,7 @@ const HomePage = () => {
 
                 <div className="tag-list">
                     {tagsData && tagsData?.tags?.map((tag:string, index:number)=>{
-                        return (<Link to="/tag" className="tag-pill tag-default" onClick={()=>getPopulaTagArticleHundle(tag)}>{ tag}</Link>)
+                        return (<Link to="/tag" className="tag-pill tag-default" onClick={() => { getPopulaTagArticleHundle(tag); getTagName(tag)}}>{ tag}</Link>)
                     })}
                 </div>
                 </div>

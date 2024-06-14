@@ -1,11 +1,26 @@
-import React, { useContext } from 'react'
-import PageLayout from '../../../components/PageLayout'
-import { authContext } from '../../../ services/contexts/authContent'
-
+import React, { useContext, useEffect, useState } from 'react'
+import { authContext } from '../../../services/contexts/authContent'
 const Login = () => {
-    const {loginHundleSubmit, loginHandleChange, loginError} = useContext(authContext)
+    const { loginHundleSubmit, loginHandleChange, LoginError, LogingIsError } = useContext(authContext)
+    const [error, setError] = useState<any>("")
+
+    useEffect(() => {
+        if (LogingIsError) {
+            setError(LoginError?.response?.data?.errors)
+           
+          const errorInterval = setInterval(() => {
+                setError(null);
+            }, 8000);
+
+            setTimeout(() => {
+                clearInterval(errorInterval);
+            }, 9000);
+        }
+    }, [LogingIsError])
+
+    console.log("login", error)
+    
   return (
-<PageLayout>
     <div className="auth-page">
         <div className="container page">
             <div className="row">
@@ -16,7 +31,7 @@ const Login = () => {
                 </p>
 
                 <ul className="error-messages">
-                {loginError && <li> email or password is invalid</li>}
+                {error && <li> email or password is invalid</li>}
                 </ul>
 
                 <form>
@@ -33,7 +48,6 @@ const Login = () => {
             </div>
         </div>
     </div>
-</PageLayout>
   )
 }
 

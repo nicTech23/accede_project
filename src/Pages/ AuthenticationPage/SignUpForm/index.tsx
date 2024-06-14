@@ -1,16 +1,38 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import PageLayout from '../../../components/PageLayout'
-import { authContext } from '../../../ services/contexts/authContent'
+import { authContext } from '../../../services/contexts/authContent'
 
 const Signup = () => {
     const {
         signUpHandleChange,
           signUpHundleSubmit,
-          signUpError
+        SignUpgIsError,
+        SignUpError
     } = useContext(authContext)
 
+    const [error, setError] = useState<any>("")
+
+    useEffect(() => {
+        if (SignUpgIsError) {
+            setError(SignUpError?.response?.data?.errors)
+            
+            const errorInterval = setInterval(() => {
+                setError(null);
+            }, 8000);
+
+            setTimeout(() => {
+                clearInterval(errorInterval);
+            }, 9000);
+        }
+    },[SignUpgIsError])
+
+//     {
+//     "username": [
+//         "has already been taken"
+//     ]
+// }
+    
   return (
-   <PageLayout>
     <div className="auth-page">
         <div className="container page">
             <div className="row">
@@ -21,7 +43,8 @@ const Signup = () => {
                 </p>
 
                 <ul className="error-messages">
-                <li>That email is already taken</li>
+                {error?.username  && <li>Username {error?.username[0]}</li> }
+                {error?.email  && <li>email {error?.email[0]}</li> }
                 </ul>
 
                 <form>
@@ -40,7 +63,6 @@ const Signup = () => {
             </div>
         </div>
     </div>
-</PageLayout> 
   )
 }
 

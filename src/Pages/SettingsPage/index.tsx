@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { settingsContext } from '../../services/contexts/settingsContext'
 
 const Settings = () => {
-  return (
+    const {settingsSubmit, fieldsHandleChange} = useContext(settingsContext)
+    return (
     <div className="settings-page">
         <div className="container page">
             <div className="row">
@@ -37,8 +39,9 @@ const Settings = () => {
                         placeholder="New Password"
                     />
                     </fieldset>
+                    
+                    </fieldset>
                     <button className="btn btn-lg btn-primary pull-xs-right">Update Settings</button>
-                </fieldset>
                 </form>
                 <hr />
                 <button className="btn btn-outline-danger">Or click here to logout.</button>

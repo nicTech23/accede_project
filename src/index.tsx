@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import FeedProvider from './ services/contexts/feedContext';
-import AuthProvider from './ services/contexts/authContent';
+import FeedProvider from './services/contexts/feedContext';
+import AuthProvider from './services/contexts/authContent';
+import SettingsProvider from './services/contexts/settingsContext';
+import EditorProvider from './services/contexts/editorContext';
 
 const queryClient = new QueryClient()
 
@@ -17,7 +19,11 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <FeedProvider>
         <AuthProvider>
-        <App />
+          <SettingsProvider>
+            <EditorProvider>
+              <App />
+            </EditorProvider>
+          </SettingsProvider>
        </AuthProvider> 
       </FeedProvider>
     </QueryClientProvider>
