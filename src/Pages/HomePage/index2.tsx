@@ -11,19 +11,19 @@ const HomePage = () => {
         end: 9
     })
 
+    const changePage = (index: number) => {
+        setPagination({
+            start: index * 10,
+            end: (index * 10) + 9
+        });
+    }
+
     const [tag, setTag] = useState<string>("")
 
     const getTagName = (tag: string) => {
         setTag(tag) 
     }
     
-
-    const changePage = (index: number) => {
-        if (pagination.start === 0) {
-            
-        }
-        setPagination({...pagination, start: pagination.start * index, end: pagination.end + 1 })
-    }
   return (
     <div className="home-page">
         <div className="banner">
@@ -82,10 +82,10 @@ const HomePage = () => {
                 }
     
                 <ul className="pagination">
-                    {tagFeedData && Array(tagFeedData?.articles?.length / 10).fill(0).map((_, index)=>{
+                    {tagFeedData && Array(tagFeedData?.articles?.length / 10).fill(0).map((_, index:number)=>{
                         return (
-                            <li key={index} className="page-item ">
-                                <a className="page-link" href="">{index +1}</a>
+                            <li key={index} className="page-item " onChange={()=>changePage(index)}>
+                                <Link className="page-link" to="/tag">{index +1}</Link>
                             </li>
                         )
                     })}

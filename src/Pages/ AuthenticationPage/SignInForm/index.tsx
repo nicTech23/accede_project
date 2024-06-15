@@ -4,6 +4,11 @@ const Login = () => {
     const { loginHundleSubmit, loginHandleChange, LoginError, LogingIsError } = useContext(authContext)
     const [error, setError] = useState<any>("")
 
+    /**
+ * Effect hook to handle signin errors.
+ * If there's a signin error, it sets the error state to the error message.
+ * The error message is cleared after 8 seconds.
+ */
     useEffect(() => {
         if (LogingIsError) {
             setError(LoginError?.response?.data?.errors)

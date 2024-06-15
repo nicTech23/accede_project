@@ -12,10 +12,10 @@ const HomePage = () => {
     })
 
     const changePage = (index: number) => {
-        if (pagination.start === 0) {
-            
-        }
-        setPagination({...pagination, start: pagination.start * index, end: pagination.end + 1 })
+        setPagination({
+            start: index * 10,
+            end: (index * 10) + 9
+        });
     }
   return (
     <div className="home-page">
@@ -73,10 +73,10 @@ const HomePage = () => {
                 }
     
                 <ul className="pagination">
-                    {feedData && Array(feedData?.articles?.length / 10).fill(0).map((_, index)=>{
+                    {feedData && Array(feedData?.articles?.length / 10).fill(0).map((_, index:number)=>{
                         return (
-                            <li key={index} className="page-item ">
-                                <a className="page-link" href="">{index +1}</a>
+                            <li key={index} className="page-item " onClick={()=>changePage(index)}>
+                                <Link className="page-link" to="/">{index +1}</Link>
                             </li>
                         )
                     })}

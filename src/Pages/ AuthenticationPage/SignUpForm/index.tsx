@@ -10,6 +10,11 @@ const Signup = () => {
         SignUpError
     } = useContext(authContext)
 
+/**
+ * Effect hook to handle signup errors.
+ * If there's a signup error, it sets the error state to the error message.
+ * The error message is cleared after 8 seconds.
+ */
     const [error, setError] = useState<any>("")
 
     useEffect(() => {
@@ -26,11 +31,6 @@ const Signup = () => {
         }
     },[SignUpgIsError])
 
-//     {
-//     "username": [
-//         "has already been taken"
-//     ]
-// }
     
   return (
     <div className="auth-page">

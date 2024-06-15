@@ -83,7 +83,7 @@ const FeedProvider = ({ children }: FeedProviderProps) => {
   // Function to fetch feeds
   const getFeeds = useCallback(async () => {
     try {
-      const response = await axios.get(`https://api.realworld.io/api/articles?limit=100`);
+      const response = await axios.get(`https://api.realworld.io/api/articles?limit=300`);
       return response.data;
     } catch (error) {
       console.log(error);

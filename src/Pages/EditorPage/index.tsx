@@ -4,7 +4,7 @@ import { editorContext } from '../../services/contexts/editorContext'
 
 const EditorPage = () => {
 
-    const { handleSubmit, hanndleChange } = useContext<any>(editorContext)
+const { handleSubmit, hanndleChange } = useContext<any>(editorContext)
     
   return (
     <div className="editor-page">

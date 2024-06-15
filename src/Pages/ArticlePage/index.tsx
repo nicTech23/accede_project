@@ -7,16 +7,17 @@ import formatDate from '../../services/dataFormat'
 const ArticlePage = () => {
     const { slug } = useParams()
     
-    const { data, error, isLoading, isSuccess} = useQuery({
-    queryKey: ["tags", slug], // Adding slug to the queryKey to ensure it re-fetches when slug changes
-    queryFn: () => getArticleSlug(slug as string), // Passing a function that calls getArticleSlug
-  });
+   const {
+        data,
+        error,
+        isLoading,
+        isSuccess
+    } = useQuery({
+        queryKey: ["tags", slug], // Adding slug to the queryKey to ensure it re-fetches when slug changes
+        queryFn: () => getArticleSlug(slug as string), // Passing a function that calls getArticleSlug
+        enabled: !!slug, // Ensures the query runs only if the slug is defined
+    });
 
-    if (isSuccess) {
-        console.log("success", data)
-    }
-  
-//
   return (
     <div className="article-page">
         <div className="banner">
